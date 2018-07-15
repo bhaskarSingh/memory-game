@@ -1,8 +1,58 @@
 /*
- * Create a list that holds all of your cards
+ * List of html cards including
+ * paper-plane, anchor, bolt, cube, leaf, bicycle, bomb cards
+ * each card has it's two copies
  */
-
-
+const HTML_CARD_LIST = [
+    `<li class="card">
+        <i class="fa fa-diamond"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-paper-plane-o"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-anchor"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-bolt"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-cube"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-anchor"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-leaf"></i>
+    </li>`,
+`    <li class="card">
+        <i class="fa fa-bicycle"></i>
+    </li>`,
+`    <li class="card">
+        <i class="fa fa-diamond"></i>
+    </li>`,
+`    <li class="card">
+        <i class="fa fa-bomb"></i>
+    </li>`,
+`    <li class="card">
+        <i class="fa fa-leaf"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-bomb"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-bolt"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-bicycle"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-paper-plane-o"></i>
+    </li>`,
+    `<li class="card">
+        <i class="fa fa-cube"></i>
+    </li>`
+];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -24,7 +74,27 @@ function shuffle(array) {
 
     return array;
 }
+/**
+ * @description Creates randomize Memory card layout every time
+ * the function is called
+ */
+function createRandomMemoryCardLayout(){
+    const RANDOM = shuffle(HTML_CARD_LIST);
+    const DECK = document.createElement("ul");
+    DECK.setAttribute('class', 'deck');
+    RANDOM.forEach((element) => {
+        DECK.insertAdjacentHTML('beforeend', element);
+    });
+    document.querySelector(".container").appendChild(DECK);
+}
+/**
+ * start Memory card game
+ */
+function startGame(){
+    createRandomMemoryCardLayout();
+}
 
+startGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:
