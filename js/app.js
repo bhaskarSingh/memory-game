@@ -135,6 +135,10 @@ function runMemoryCardGame(){
     $( ".deck" ).on( "click", "li", function() {
         //Increments count on every click
         $('.moves').text(parseInt(++counter));
+        //start timer
+        $('#timer').timer({
+            format: '%M:%S'  //Display time as 00:00:00
+        });
         //shows number of stars according to no of moves
         starRater(counter);
         //Makes sure that user doesn't accidently clicks on the clicked

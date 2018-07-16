@@ -114,3 +114,7 @@ h1 {
 #matched-card {
     background: #07da35af;
 }
+
+#timer{
+    margin:0 5px 0 100px;
+}
