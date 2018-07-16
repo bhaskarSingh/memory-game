@@ -88,10 +88,64 @@ function createRandomMemoryCardLayout(){
     document.querySelector(".container").appendChild(DECK);
 }
 /**
+ * @description This function runs automatic at beginning of the script and "checks"
+ * which Animation End handle the browser accept and writes if in the variable animationEnd
+ * (in the most cases it's "animationend") and prevents the browser from reacting to animationEnd 2 times.
+ */
+const animationEnd = (function(el) {
+    const animations = {
+      animation: 'animationend',
+      OAnimation: 'oAnimationEnd',
+      MozAnimation: 'mozAnimationEnd',
+      WebkitAnimation: 'webkitAnimationEnd',
+    };
+    for (let t in animations) {
+      if (el.style[t] !== undefined) {
+        return animations[t];
+      }
+    }
+})(document.createElement('div')); //Fake element
+
+/**
+ * @description Function checks whether the two cards matches, if matched
+ * it will stay open else both fill hide away
+ */
+function runMemoryCardGame(){
+    //List to keep track of clicked cards
+    let list = [];
+    $( ".deck" ).on( "click", "li", function() {
+        // When the card is clicked it added to the list
+        list.push( $( this ).addClass( "open show" ) );
+        //When second card is clicked it checks whether both cards matches or not
+        if(list.length === 2){
+            //If second card doesn't match with the first one hide back both the cards
+            //show the animation of shake and red background and then hide the card
+            if(list[0].children().attr('class') !== list[1].children().attr('class')){
+                $(list[0]).addClass('animated shake').attr('id' ,'card-error').one(animationEnd, function(){
+                    $(this).removeClass('open show animated shake');
+                    $(this).removeAttr('id' ,'card-error');
+                } );
+                $(list[1]).addClass('animated shake').attr('id' ,'card-error').one(animationEnd, function(){
+                    $(this).removeClass('open show animated shake');
+                    $(this).removeAttr('id' ,'card-error');
+                } );
+            }else{
+                //If both the card matches then don't hide the card
+                $(list[0]).addClass('animated pulse');
+                $(list[1]).addClass('animated pulse');
+            }
+            //after every second click empty the list so that the function can again
+            //check whether both the card matches or not
+            list = [];
+        }
+    });
+}
+/**
  * start Memory card game
  */
 function startGame(){
     createRandomMemoryCardLayout();
+    runMemoryCardGame();
 }
 
 startGame();
