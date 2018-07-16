@@ -113,7 +113,11 @@ const animationEnd = (function(el) {
 function runMemoryCardGame(){
     //List to keep track of clicked cards
     let list = [];
+    //Move counter
+    let counter = 0;
     $( ".deck" ).on( "click", "li", function() {
+        //Increments count on every click
+        $('.moves').text(parseInt(++counter));
         // When the card is clicked it added to the list
         list.push( $( this ).addClass( "open show" ) );
         //When second card is clicked it checks whether both cards matches or not
