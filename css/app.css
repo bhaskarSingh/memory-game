@@ -111,3 +111,6 @@ h1 {
 #card-error {
     background: rgba(231, 25, 25, 0.733);
 }
+#matched-card {
+    background: #07da35af;
+}

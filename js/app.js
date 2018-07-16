@@ -154,8 +154,8 @@ function runMemoryCardGame(){
                 } );
             }else{
                 //If both the card matches then don't hide the card
-                $(list[0]).addClass('animated pulse');
-                $(list[1]).addClass('animated pulse');
+                $(list[0]).addClass('animated pulse').attr('id' ,'matched-card');
+                $(list[1]).addClass('animated pulse').attr('id' ,'matched-card');;
             }
             //after every second click empty the list so that the function can again
             //check whether both the card matches or not
