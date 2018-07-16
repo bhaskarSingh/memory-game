@@ -105,7 +105,24 @@ const animationEnd = (function(el) {
       }
     }
 })(document.createElement('div')); //Fake element
+/**
+ * @description shows stars according to the number of moves
+ * @param {*} counter --> No of moves
+ */
+function starRater(counter){
+    if(counter > 36){
+        $('.stars').find('li:nth-child(1)').children().attr('class','fa fa-star-half');
+    }else if(counter > 32){
+        $('.stars').find('li:nth-child(2)').children().removeClass('fa fa-star-half');
+    }else if(counter > 28){
+        $('.stars').find('li:nth-child(2)').children().attr('class','fa fa-star-half');
+    }else if(counter > 24){
+        $('.stars').find('li:nth-child(3)').children().removeClass('fa fa-star-half');
+    }else if(counter > 20){
+        $('.stars').find('li:nth-child(3)').children().attr('class','fa fa-star-half');
+    }
 
+}
 /**
  * @description Function checks whether the two cards matches, if matched
  * it will stay open else both fill hide away
@@ -118,6 +135,8 @@ function runMemoryCardGame(){
     $( ".deck" ).on( "click", "li", function() {
         //Increments count on every click
         $('.moves').text(parseInt(++counter));
+        //shows number of stars according to no of moves
+        starRater(counter);
         // When the card is clicked it added to the list
         list.push( $( this ).addClass( "open show" ) );
         //When second card is clicked it checks whether both cards matches or not
