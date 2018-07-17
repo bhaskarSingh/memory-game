@@ -79,6 +79,10 @@ function shuffle(array) {
  * the function is called
  */
 function createRandomMemoryCardLayout(){
+    //Remove the card layout if already present
+    if ($('.deck').parent().length){
+        $('.deck').remove();
+    }
     const RANDOM = shuffle(HTML_CARD_LIST);
     const DECK = document.createElement("ul");
     DECK.setAttribute('class', 'deck');
@@ -120,8 +124,31 @@ function starRater(counter){
         $('.stars').find('li:nth-child(3)').children().removeClass('fa fa-star-half');
     }else if(counter > 20){
         $('.stars').find('li:nth-child(3)').children().attr('class','fa fa-star-half');
+    }else{ //show 3 stars if moves are less than 21
+        $('.stars').find('li').children().attr('class','fa fa-star');
     }
+}
 
+/**
+ * @description Reset the Memory card game, including move counter
+ * star rater and timer
+ */
+function resetGame(){
+    $('.restart').on('click', function(){
+        $('.deck > li').removeClass('open show animated pulse').removeAttr('id', 'matched-card').addClass('animated flipInX').one(animationEnd, function(){
+            //Reset the timer
+            $('#timer').timer('reset');
+            $('#timer').timer('remove');
+            //Reset the move counter
+            counter = 0;
+            //Reset the star rater
+            starRater(counter);
+            //show the changed move counter value of 0 in html
+            $('.moves').text(parseInt(0));
+            //Reset the memory card game
+            startGame();
+        } );
+    })
 }
 /**
  * @description Function checks whether the two cards matches, if matched
@@ -170,6 +197,7 @@ function runMemoryCardGame(){
             list = [];
         }
     });
+    resetGame();
 }
 /**
  * start Memory card game
@@ -178,7 +206,6 @@ function startGame(){
     createRandomMemoryCardLayout();
     runMemoryCardGame();
 }
-
 startGame();
 
 /*
