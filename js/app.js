@@ -114,9 +114,7 @@ const animationEnd = (function(el) {
  * @param {*} counter --> No of moves
  */
 function starRater(counter){
-    if(counter > 36){
-        $('.stars').find('li:nth-child(1)').children().attr('class','fa fa-star-half');
-    }else if(counter > 32){
+    if(counter > 32){
         $('.stars').find('li:nth-child(2)').children().removeClass('fa fa-star-half');
     }else if(counter > 28){
         $('.stars').find('li:nth-child(2)').children().attr('class','fa fa-star-half');
