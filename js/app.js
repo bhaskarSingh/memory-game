@@ -74,6 +74,10 @@ function shuffle(array) {
 
     return array;
 }
+
+//Move counter
+let counter = 0;
+
 /**
  * @description Creates randomize Memory card layout every time
  * the function is called
@@ -132,22 +136,47 @@ function starRater(counter){
  * star rater and timer
  */
 function resetGame(){
-    $('.restart').on('click', function(){
-        $('.deck > li').removeClass('open show animated pulse').removeAttr('id', 'matched-card').addClass('animated flipInX').one(animationEnd, function(){
-            //Reset the timer
-            $('#timer').timer('reset');
-            $('#timer').timer('remove');
-            //Reset the move counter
-            counter = 0;
-            //Reset the star rater
-            starRater(counter);
-            //show the changed move counter value of 0 in html
-            $('.moves').text(parseInt(0));
-            //Reset the memory card game
-            startGame();
-        } );
-    })
+    $('.deck > li').removeClass('open show animated pulse').removeAttr('id', 'matched-card').addClass('animated flipInX').one(animationEnd, function(){
+        //Reset the timer
+        $('#timer').timer('reset');
+        $('#timer').timer('remove');
+        //Reset the move counter
+        counter = 0;
+        //Reset the star rater
+        starRater(counter);
+        //show the changed move counter value of 0 in html
+        $('.moves').text(parseInt(0));
+        //Reset the memory card game
+        startGame();
+    } );
 }
+/**
+ * @description Shows pop modal on successfully completing the game,
+ * with time took to complete the game and play again button
+ */
+function CongratulationsPopup(){
+    // When the user clicks on <span> (x), close the modal
+    $('.close').click(function(){
+        $('#myModal').css('display', 'none');
+    });
+    //pause the timer
+    $('#timer').timer('pause');
+    //Get the timer value in seconds
+    let time = $('#timer').data('seconds')
+    //Convert the timer value in minutes
+    var minutes = Math.floor(time / 60);
+    //store the leftover seconds after converting time into minutes
+    var seconds = time - minutes * 60;
+    //set the html showing time took to completed the game
+    $('.stats').text(`You took ${minutes} minute(s) and ${seconds} seconds time and ${counter} moves to complete the game`);
+    //Reset the game, on clicking the play again button and hide the pop modal
+    $('.playAgain').click(function(){
+        $('#myModal').css('display', 'none');
+        resetGame();
+    });
+    $('#myModal').css('display', 'block');
+}
+
 /**
  * @description Function checks whether the two cards matches, if matched
  * it will stay open else both fill hide away
@@ -155,8 +184,6 @@ function resetGame(){
 function runMemoryCardGame(){
     //List to keep track of clicked cards
     let list = [];
-    //Move counter
-    let counter = 0;
     $( ".deck" ).on( "click", "li", function() {
         //Increments count on every click
         $('.moves').text(parseInt(++counter));
@@ -194,8 +221,15 @@ function runMemoryCardGame(){
             //check whether both the card matches or not
             list = [];
         }
+        //run if user wins the game
+        if($('.deck').find('li#matched-card').length === 16){
+            CongratulationsPopup()
+        }
     });
-    resetGame();
+    //When user clicks on reset game button, reset the game
+    $('.restart').on('click', function(){
+        resetGame();
+    });
 }
 /**
  * start Memory card game
