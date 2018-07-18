@@ -38,22 +38,21 @@ h1 {
  */
 
 .deck {
-    width: 660px;
+    padding: 20px;
+    width: 100%;
+    margin: 20px 0;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 85px;
+    width: 85px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -86,9 +85,8 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    width: 300px;
+    margin: 0 auto;
 }
 
 .score-panel .stars {
@@ -124,7 +122,11 @@ h1 {
 }
 
 #timer{
-    margin:0 5px 0 100px;
+    margin: 10px;
+}
+
+.deck > li:last-child {
+    margin: 0 auto;
 }
 
 /* The Modal (background) */
@@ -163,4 +165,51 @@ h1 {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Media queries */
+
+@media only screen and (min-width: 350px) and (max-width: 480px) {
+    .deck .card {
+        height: 95px;
+        width: 28%;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 533px) {
+    .deck .card {
+        height: 100px;
+        width: 100px;
+    }
+    
+    .deck > li:last-child {
+        margin: 0;
+    }
+}
+
+@media only screen and (min-width: 534px) and (max-width: 605px) {
+    .deck .card {
+        height: 115px;
+        width: 115px;
+    }
+    
+    .deck > li:last-child {
+        margin: 0;
+    }
+}
+
+@media only screen and (min-width: 606px) {
+    .deck {
+        width: 600px;
+        box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    }
+
+    .deck .card {
+        height: 125px;
+        width: 125px;
+    }
+    
+    .deck > li:last-child {
+        margin: 0;
+    }
 }
