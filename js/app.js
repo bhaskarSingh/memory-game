@@ -237,6 +237,9 @@ function runMemoryCardGame(){
 function startGame(){
     createRandomMemoryCardLayout();
     runMemoryCardGame();
+    // $('#gameStarter').css('display', 'block');
+    $('select').formSelect();
+    $('.collapsible').collapsible();
 }
 startGame();
 

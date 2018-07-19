@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- Compiled and minified Materialize framework CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
@@ -36,26 +38,58 @@
         </section>
 
     </div>
-    <!-- The Modal -->
-<div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <img src="img/congratulations.gif" alt="congratulations" width="100%">
-        <p>Congratulations You Won!</p>
-        <p class="stats" ></p>
-        <div class="rating" >
-            <ul class="stars"> Rating :
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
+    <!-- The Modal on winning the game popup -->
+    <div id="myModal" class="modal-popup">
+
+        <!-- Modal content -->
+        <div class="modal-content center">
+            <span class="close">&times;</span>
+            <img src="img/congratulations.gif" alt="congratulations" width="100%">
+            <p>Congratulations You Won!</p>
+            <p class="stats" ></p>
+            <div class="rating" >
+                <ul class="stars"> Rating :
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+            </div>
+            <a class="btn waves-effect waves-light grey playAgain">Play Again</a>
         </div>
-        <button class="playAgain">Play again</button>
+
     </div>
 
-</div>
+    <!-- The game starter popup -->
+    <div id="gameStarter" class="modal-popup">
+
+        <!-- Modal content -->
+        <div class="modal-content center">
+            <h5>Welcome to memory matching game</h5>
+            <!-- Dropdown Trigger -->
+            Choose Difficulty Mode:
+
+            <div class="input-field col s12">
+                <select>
+                    <option value="1">No-Time-Limit(By default)</option>
+                    <option value="2">Normal</option>
+                    <option value="3">Hard</option>
+                </select>
+            </div>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">Instructions on how to play the Game</div>
+                    <div class="collapsible-body"><span>You have to select two identical cards,
+                        until you have selected all the cards and on matching all the cards A
+                        popup will come declaring you as winner with all the stats relating to the game</span></div>
+                </li>
+            </ul>
+            <a class="btn waves-effect waves-light btn-large blue">Start Game</a>
+            </div>
+            
+    </div>
+
     <!-- JQuery library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- timer library -->
