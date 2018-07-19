@@ -187,10 +187,29 @@ function runMemoryCardGame(){
     $( ".deck" ).on( "click", "li", function() {
         //Increments count on every click
         $('.moves').text(parseInt(++counter));
+        //Select this option if no-time-limit mode is selected
+        if(value === 1){
+            $('#timer').timer({
+                format: '%M:%S'  //Display time as 00:00:00
+            });
+         //Select this option if normal mode is selected with 30s time limit
+        }else if(value === 2){
+            $('#timer').timer({
+                duration: '30s',
+                callback: function() {
+                    $('#timesUp').css('display', 'block');
+                }
+            });
+        //Select this option if hard mode is selected with 25s time limit
+        }else if(value === 3){
+            $('#timer').timer({
+                duration: '25s',
+                callback: function() {
+                    $('#timesUp').css('display', 'block');
+                }
+            });
+        }
         //start timer
-        $('#timer').timer({
-            format: '%M:%S'  //Display time as 00:00:00
-        });
         //shows number of stars according to no of moves
         starRater(counter);
         //Makes sure that user doesn't accidently clicks on the clicked
@@ -237,14 +256,18 @@ function runMemoryCardGame(){
 function startGame(){
     createRandomMemoryCardLayout();
     runMemoryCardGame();
-    $('#gameStarter').css('display', 'block');
-    $('select').formSelect();
-    $('.collapsible').collapsible();
 }
-startGame();
 
+//Difficulty mode value
 let value;
-$('select').on('change', function() {
+/**
+ * @description on difficulty mode selection get the
+ * value of selected drop-down menu and keep a look
+ * out for if there is any change in the value or not
+ * and if yes then update the value
+ */
+$('#options').on('change', function() {
+    //Get the value for the difficulty mode
     value = parseInt(this.value);
     if(value === 1){
         console.log("No limit");
@@ -255,15 +278,43 @@ $('select').on('change', function() {
     }
 })
 
-  $('.start-game').click(function(){
-    // $('#gameStarter').css('display', 'none');
-    // console.log(gameDifficulty());
+
+/**
+ * @description on clicking "start game" button
+ * check is any difficulty mode is selected that start the game
+ * otherwise popup a toast message saying please select a
+ * difficulty mode
+ */
+$('.start-game').click(function(){
     if(value === undefined){
         M.toast({html: 'Please! choose a Difficulty mode'})
     }else{
         $('#gameStarter').css('display', 'none');
+        startGame();
     }
-  });
+});
+
+/**
+ * @description If user is not able to complete the game under
+ * normal or hard mode this popup will come up showing an
+ * option with "retry again" button to play the respective mode again
+ */
+$('.retry-again').click(function(){
+    $('#timesUp').css('display', 'none');
+    resetGame();
+});
+
+/**
+ * @description Display starter popup as soon as
+ * the page loads up and initialize the necessary
+ * jquery plugin
+ */
+(function starterPage(){
+    $('select').formSelect();
+    $('.collapsible').collapsible();
+    $('#gameStarter').css('display', 'block');
+}());
+
 
 /*
  * set up the event listener for a card. If a card is clicked:

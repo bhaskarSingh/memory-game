@@ -218,4 +218,8 @@ ul:not(.browser-default){
     .deck > li:last-child {
         margin: 0;
     }
+
+    .congratulationsImg {
+        width: inherit;
+    }
 }

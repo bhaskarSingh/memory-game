@@ -34,7 +34,7 @@
             <span id="timer">0 sec</span> : Timer
             <div class="restart">
         		<i class="fa fa-repeat"></i>
-        	</div>
+            </div>
         </section>
 
     </div>
@@ -45,7 +45,7 @@
         <!-- Modal content -->
         <div class="modal-content center">
             <span class="close">&times;</span>
-            <img src="img/congratulations.gif" alt="congratulations" width="100%">
+            <img src="img/congratulations.gif" alt="congratulations" width="100%" class="congratulationsImg" >
             <p>Congratulations You Won!</p>
             <p class="stats" ></p>
             <div class="rating" >
@@ -63,32 +63,43 @@
     <!-- The game starter popup -->
     <div id="gameStarter" class="modal-popup">
 
+    <!-- Modal content -->
+    <div class="modal-content center">
+        <h5>Welcome to memory matching game</h5>
+        <!-- Dropdown Trigger -->
+        Choose Difficulty Mode:
+
+        <div class="input-field col s12">
+            <select id="options" >
+                <option value="" disabled selected >Choose an Option</option>
+                <option value="1">No-Time-Limit</option>
+                <option value="2">Normal</option>
+                <option value="3">Hard</option>
+            </select>
+        </div>
+
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">Instructions on how to play the Game</div>
+                <div class="collapsible-body"><span>You have to select two identical cards,
+                    until you have selected all the cards and on matching all the cards A
+                    popup will come declaring you as winner with all the stats relating to the game</span></div>
+            </li>
+        </ul>
+        <a class="btn waves-effect waves-light btn-large blue start-game">Start Game</a>
+        </div>
+            
+    </div>
+
+     <!-- The Modal for if user fails to complete the normal or hard mode in time -->
+     <div id="timesUp" class="modal-popup">
+
         <!-- Modal content -->
         <div class="modal-content center">
-            <h5>Welcome to memory matching game</h5>
-            <!-- Dropdown Trigger -->
-            Choose Difficulty Mode:
-
-            <div class="input-field col s12">
-                <select id="options" >
-                    <option value="" disabled selected >Choose an Option</option>
-                    <option value="1">No-Time-Limit</option>
-                    <option value="2">Normal</option>
-                    <option value="3">Hard</option>
-                </select>
-            </div>
-
-            <ul class="collapsible">
-                <li>
-                    <div class="collapsible-header">Instructions on how to play the Game</div>
-                    <div class="collapsible-body"><span>You have to select two identical cards,
-                        until you have selected all the cards and on matching all the cards A
-                        popup will come declaring you as winner with all the stats relating to the game</span></div>
-                </li>
-            </ul>
-            <a class="btn waves-effect waves-light btn-large blue start-game">Start Game</a>
-            </div>
-            
+            <h4>Times Up!</h4>
+            <a class="btn waves-effect waves-light red retry-again">Try Again</a>
+        </div>
+    
     </div>
 
     <!-- JQuery library -->
