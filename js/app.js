@@ -237,11 +237,33 @@ function runMemoryCardGame(){
 function startGame(){
     createRandomMemoryCardLayout();
     runMemoryCardGame();
-    // $('#gameStarter').css('display', 'block');
+    $('#gameStarter').css('display', 'block');
     $('select').formSelect();
     $('.collapsible').collapsible();
 }
 startGame();
+
+let value;
+$('select').on('change', function() {
+    value = parseInt(this.value);
+    if(value === 1){
+        console.log("No limit");
+    }else if(value === 2){
+        console.log("Normal");
+    }else if(value === 3) {
+        console.log("Hard");
+    }
+})
+
+  $('.start-game').click(function(){
+    // $('#gameStarter').css('display', 'none');
+    // console.log(gameDifficulty());
+    if(value === undefined){
+        M.toast({html: 'Please! choose a Difficulty mode'})
+    }else{
+        $('#gameStarter').css('display', 'none');
+    }
+  });
 
 /*
  * set up the event listener for a card. If a card is clicked:
