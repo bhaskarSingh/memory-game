@@ -93,7 +93,7 @@ function createRandomMemoryCardLayout(){
     RANDOM.forEach((element) => {
         DECK.insertAdjacentHTML('beforeend', element);
     });
-    document.querySelector(".container").appendChild(DECK);
+    document.querySelector(".main-container").appendChild(DECK);
 }
 /**
  * @description This function runs automatic at beginning of the script and "checks"
