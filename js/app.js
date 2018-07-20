@@ -271,13 +271,19 @@ $('#options').on('change', function() {
     value = parseInt(this.value);
     if(value === 1){
         console.log("No limit");
+        $('.mode-selected').text('Mode Selected: No-Time-Limit');
     }else if(value === 2){
         console.log("Normal");
+        $('.mode-selected').text('Mode Selected: Normal');
     }else if(value === 3) {
         console.log("Hard");
+        $('.mode-selected').text('Mode Selected: Hard');
     }
 })
 
+$('.change-mode').click(function(){
+    $('#gameStarter').css('display', 'block');
+})
 
 /**
  * @description on clicking "start game" button
@@ -291,6 +297,7 @@ $('.start-game').click(function(){
     }else{
         $('#gameStarter').css('display', 'none');
         startGame();
+        resetGame();
     }
 });
 
