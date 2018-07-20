@@ -118,15 +118,20 @@ const animationEnd = (function(el) {
  * @param {*} counter --> No of moves
  */
 function starRater(counter){
-    if(counter > 32){
+    //show 1 star
+    if(counter > 34){
         $('.stars').find('li:nth-child(2)').children().removeClass('fa fa-star-half');
-    }else if(counter > 28){
+    //show one and half star
+    }else if(counter > 30){
         $('.stars').find('li:nth-child(2)').children().attr('class','fa fa-star-half');
-    }else if(counter > 24){
+    //show 2 stars
+    }else if(counter > 26){
         $('.stars').find('li:nth-child(3)').children().removeClass('fa fa-star-half');
-    }else if(counter > 20){
+    //show 2 and a half star
+    }else if(counter > 22){
         $('.stars').find('li:nth-child(3)').children().attr('class','fa fa-star-half');
-    }else{ //show 3 stars if moves are less than 21
+    //show 3 stars if moves are less than 23
+    }else{
         $('.stars').find('li').children().attr('class','fa fa-star');
     }
 }
