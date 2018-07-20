@@ -303,22 +303,8 @@ $('#options').on('change', function() {
     }
 })
 
-/**
- * @description on clicking the "change mode" button
- * display the startGame modal with the option to close the modal
- * if user decides to choose no option other wise change the game
- * functionality accordingly
- */
 $('.change-mode').click(function(){
     $('#gameStarter').css('display', 'block');
-    //Add close option only if it isn't there
-    if($('.close-change-mode').length === 0){
-        $('#gameStarter').find('.modal-content').prepend('<span class="close close-change-mode">&times;</span>');
-    }
-    //Hide the gameStarter modal on clicking the close symbol
-    $('.close-change-mode').click(function(){
-        $('#gameStarter').css('display', 'none');
-    })
 })
 
 /**
