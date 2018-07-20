@@ -195,7 +195,7 @@ function runMemoryCardGame(){
          //Select this option if normal mode is selected with 30s time limit
         }else if(value === 2){
             $('#timer').timer({
-                duration: '33s',
+                duration: '30s',
                 callback: function() {
                     $('#timesUp').css('display', 'block');
                 }
@@ -203,7 +203,7 @@ function runMemoryCardGame(){
         //Select this option if hard mode is selected with 25s time limit
         }else if(value === 3){
             $('#timer').timer({
-                duration: '28s',
+                duration: '25s',
                 callback: function() {
                     $('#timesUp').css('display', 'block');
                 }
@@ -288,13 +288,13 @@ $('#options').on('change', function() {
         //show text on main page with normal mode selected status
         $('.mode-selected').text('Mode Selected: Normal');
         //show info about the normal difficulty option
-        $('.mode-info').text('In this mode you will have 33 seconds to complete the game');
+        $('.mode-info').text('In this mode you will have 30 seconds to complete the game');
     }else if(value === 3) {
         console.log("Hard");
         //show text on main page with hard mode selected status
         $('.mode-selected').text('Mode Selected: Hard');
         //show info about the normal difficulty option
-        $('.mode-info').text('In this mode you will have 28 seconds to complete the game');
+        $('.mode-info').text('In this mode you will have 25 seconds to complete the game');
     }
 })
 
