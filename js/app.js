@@ -195,7 +195,7 @@ function runMemoryCardGame(){
          //Select this option if normal mode is selected with 30s time limit
         }else if(value === 2){
             $('#timer').timer({
-                duration: '30s',
+                duration: '33s',
                 callback: function() {
                     $('#timesUp').css('display', 'block');
                 }
@@ -203,7 +203,7 @@ function runMemoryCardGame(){
         //Select this option if hard mode is selected with 25s time limit
         }else if(value === 3){
             $('#timer').timer({
-                duration: '25s',
+                duration: '28s',
                 callback: function() {
                     $('#timesUp').css('display', 'block');
                 }
@@ -269,15 +269,35 @@ let value;
 $('#options').on('change', function() {
     //Get the value for the difficulty mode
     value = parseInt(this.value);
+    const MODE_INFO =
+     `<div class="col s12 m5">
+        <div class="card-panel blue-grey darken-2">
+            <span class="white-text mode-info ">I am a very simple card. I am good at containing small bits of information.
+            </span>
+        </div>
+    </div>`
+    //Only Add the mode card info html once and not every time difficulty mode option changes
+    if($('.mode-info').length === 0){
+        $('#gameStarter').find('.input-field').append(MODE_INFO);
+    }
     if(value === 1){
         console.log("No limit");
+        //show text on main page with no-time-limit mode selected status
         $('.mode-selected').text('Mode Selected: No-Time-Limit');
+        //show info about the no-time-limit difficulty option
+        $('.mode-info').text('In this mode you do not have any time restriction to complete the game');
     }else if(value === 2){
         console.log("Normal");
+        //show text on main page with normal mode selected status
         $('.mode-selected').text('Mode Selected: Normal');
+        //show info about the normal difficulty option
+        $('.mode-info').text('In this mode you will have 33 seconds to complete the game');
     }else if(value === 3) {
         console.log("Hard");
+        //show text on main page with hard mode selected status
         $('.mode-selected').text('Mode Selected: Hard');
+        //show info about the normal difficulty option
+        $('.mode-info').text('In this mode you will have 28 seconds to complete the game');
     }
 })
 
