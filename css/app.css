@@ -144,6 +144,10 @@ ul:not(.browser-default){
     margin: 0 auto;
 }
 
+.collapsible-body, .collapsible-header {
+    padding-left: 0;
+}
+
 /* The Modal (background) */
 .modal-popup {
     display: none; /* Hidden by default */
@@ -229,6 +233,10 @@ ul:not(.browser-default){
     }
 
     .congratulationsImg {
-        width: inherit;
+        width: 450px;
+    }
+
+    .modal-content {
+        width: 500px;
     }
 }

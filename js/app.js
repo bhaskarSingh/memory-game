@@ -270,11 +270,8 @@ $('#options').on('change', function() {
     //Get the value for the difficulty mode
     value = parseInt(this.value);
     const MODE_INFO =
-     `<div class="col s12 m5">
-        <div class="card-panel blue-grey darken-2">
-            <span class="white-text mode-info ">I am a very simple card. I am good at containing small bits of information.
-            </span>
-        </div>
+     `<div class="card-panel blue-grey darken-2">
+        <span class="white-text mode-info "></span>
     </div>`
     //Only Add the mode card info html once and not every time difficulty mode option changes
     if($('.mode-info').length === 0){
