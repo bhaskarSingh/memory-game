@@ -3,18 +3,27 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Dependencies](#Dependencies)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+On loading the game you will be presented with a modal asking you to choose game difficulty before starting the game
+b/w No-Time-Limit, Normal and Hard option after that timer will kick of as soon as you click your first card and you have
+to select two identical cards, until you have selected all the cards and on matching all the cards A popup will come
+declaring you as winner with all the stats relating to the game.
 
-To get started, open `js/app.js` and start building out the app's functionality
+**Game Difficulty options**
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+* No-Time-lImit: In this mode you do not have any time restriction to complete the game
+* Normal: In this mode you will have 30 seconds to complete the game
+* Hard: In this mode you will have 25 seconds to complete the game
 
-## Contributing
+## Dependencies
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+* [Materialize framework](https://materializecss.com/)
+* [Timer jQuery plugin](https://github.com/walmik/timer.jquery)
+* [Animate css library](https://daneden.github.io/animate.css/)
+* [Fontawesome Icons](https://fontawesome.com/)
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Link to Memory card game: [Memory card game](https://bhaskarsingh.github.io/memory-game/)
