@@ -62,7 +62,7 @@ const HTML_CARD_LIST = [
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -87,6 +87,7 @@ function createRandomMemoryCardLayout(){
     if ($('.deck').parent().length){
         $('.deck').remove();
     }
+    //get the shuffled cards array;
     const RANDOM = shuffle(HTML_CARD_LIST);
     const DECK = document.createElement("ul");
     DECK.setAttribute('class', 'deck');
@@ -95,27 +96,29 @@ function createRandomMemoryCardLayout(){
     });
     document.querySelector(".main-container").appendChild(DECK);
 }
+
 /**
- * @description This function runs automatic at beginning of the script and "checks"
- * which Animation End handle the browser accept and writes if in the variable animationEnd
+ * @description This function runs automatically at beginning of the script and "checks"
+ * which Animation End handle the browser accept and writes it in the variable animationEnd
  * (in the most cases it's "animationend") and prevents the browser from reacting to animationEnd 2 times.
  */
-const animationEnd = (function(el) {
-    const animations = {
+const ANIMATION_END = (function(el) {
+    const ANIMATIONS = {
       animation: 'animationend',
       OAnimation: 'oAnimationEnd',
       MozAnimation: 'mozAnimationEnd',
       WebkitAnimation: 'webkitAnimationEnd',
     };
-    for (let t in animations) {
+    for (let t in ANIMATIONS) {
       if (el.style[t] !== undefined) {
-        return animations[t];
+        return ANIMATIONS[t];
       }
     }
 })(document.createElement('div')); //Fake element
+
 /**
  * @description shows stars according to the number of moves
- * @param {*} counter --> No of moves
+ * @param {Number} counter --> No of moves
  */
 function starRater(counter){
     //show 1 star
@@ -141,7 +144,7 @@ function starRater(counter){
  * star rater and timer
  */
 function resetGame(){
-    $('.deck > li').removeClass('open show animated pulse').removeAttr('id', 'matched-card').addClass('animated flipInX').one(animationEnd, function(){
+    $('.deck > li').removeClass('open show animated pulse').removeAttr('id', 'matched-card').addClass('animated flipInX').one(ANIMATION_END, function(){
         //Reset the timer
         $('#timer').timer('reset');
         $('#timer').timer('remove');
@@ -155,11 +158,12 @@ function resetGame(){
         startGame();
     } );
 }
+
 /**
  * @description Shows pop modal on successfully completing the game,
  * with time took to complete the game and play again button
  */
-function CongratulationsPopup(){
+function congratulationsPopup(){
     // When the user clicks on <span> (x), close the modal
     $('.close').click(function(){
         $('#myModal').css('display', 'none');
@@ -167,24 +171,55 @@ function CongratulationsPopup(){
     //pause the timer
     $('#timer').timer('pause');
     //Get the timer value in seconds
-    let time = $('#timer').data('seconds')
+    let time = $('#timer').data('seconds');
     //Convert the timer value in minutes
-    var minutes = Math.floor(time / 60);
+    const MINUTES = Math.floor(time / 60);
     //store the leftover seconds after converting time into minutes
-    var seconds = time - minutes * 60;
+    const SECONDS = time - MINUTES * 60;
     //set the html showing time took to completed the game
-    $('.stats').text(`You took ${minutes} minute(s) and ${seconds} seconds time and ${counter} moves to complete the game`);
+    $('.stats').text(`You took ${MINUTES} minute(s) and ${SECONDS} seconds time and ${counter} moves to complete the game`);
     //Reset the game, on clicking the play again button and hide the pop modal
     $('.playAgain').click(function(){
         $('#myModal').css('display', 'none');
         resetGame();
     });
+    //Display the congratulations popup modal
     $('#myModal').css('display', 'block');
 }
 
 /**
+ * @description sets the timer according to the difficulty mode
+ * @param {Number} value --> difficulty mode value
+ */
+function setDiffcultyModeTimer(value){
+    //Select this option if no-time-limit mode is selected
+    if(value === 1){
+        //start timer
+        $('#timer').timer({
+            format: '%M:%S'  //Display time as 00:00:00
+        });
+     //Select this option if normal mode is selected with 30s time limit
+    }else if(value === 2){
+        $('#timer').timer({
+            duration: '30s',
+            callback: function() {
+                $('#timesUp').css('display', 'block');
+            }
+        });
+    //Select this option if hard mode is selected with 25s time limit
+    }else if(value === 3){
+        $('#timer').timer({
+            duration: '25s',
+            callback: function() {
+                $('#timesUp').css('display', 'block');
+            }
+        });
+    }
+}
+
+/**
  * @description Function checks whether the two cards matches, if matched
- * it will stay open else both fill hide away
+ * it will stay open else both will hide away
  */
 function runMemoryCardGame(){
     //List to keep track of clicked cards
@@ -192,29 +227,8 @@ function runMemoryCardGame(){
     $( ".deck" ).on( "click", "li", function() {
         //Increments count on every click
         $('.moves').text(parseInt(++counter));
-        //Select this option if no-time-limit mode is selected
-        if(value === 1){
-            $('#timer').timer({
-                format: '%M:%S'  //Display time as 00:00:00
-            });
-         //Select this option if normal mode is selected with 30s time limit
-        }else if(value === 2){
-            $('#timer').timer({
-                duration: '30s',
-                callback: function() {
-                    $('#timesUp').css('display', 'block');
-                }
-            });
-        //Select this option if hard mode is selected with 25s time limit
-        }else if(value === 3){
-            $('#timer').timer({
-                duration: '25s',
-                callback: function() {
-                    $('#timesUp').css('display', 'block');
-                }
-            });
-        }
-        //start timer
+        //Set timer mode according to difficulty mode value
+        setDiffcultyModeTimer(value);
         //shows number of stars according to no of moves
         starRater(counter);
         //Makes sure that user doesn't accidently clicks on the clicked
@@ -228,20 +242,20 @@ function runMemoryCardGame(){
             //If second card doesn't match with the first one hide back both the cards
             //show the animation of shake and red background and then hide the card
             if(list[0].children().attr('class') !== list[1].children().attr('class')){
-                $(list[0]).addClass('animated shake').attr('id' ,'card-error').one(animationEnd, function(){
+                $(list[0]).addClass('animated shake').attr('id' ,'card-error').one(ANIMATION_END, function(){
                     $(this).removeClass('open show animated shake');
                     $(this).removeAttr('id' ,'card-error');
                 } );
-                $(list[1]).addClass('animated shake').attr('id' ,'card-error').one(animationEnd, function(){
+                $(list[1]).addClass('animated shake').attr('id' ,'card-error').one(ANIMATION_END, function(){
                     $(this).removeClass('open show animated shake');
                     $(this).removeAttr('id' ,'card-error');
                 } );
             }else{
                 //If both the card matches then don't hide the card
-                $(list[0]).addClass('animated pulse').attr('id' ,'matched-card').one(animationEnd, function(){
+                $(list[0]).addClass('animated pulse').attr('id' ,'matched-card').one(ANIMATION_END, function(){
                     $(this).removeClass('animated pulse');
                 } );
-                $(list[1]).addClass('animated pulse').attr('id' ,'matched-card').one(animationEnd, function(){
+                $(list[1]).addClass('animated pulse').attr('id' ,'matched-card').one(ANIMATION_END, function(){
                     $(this).removeClass('animated pulse');
                 } );
             }
@@ -251,10 +265,10 @@ function runMemoryCardGame(){
         }
         //run if user wins the game
         if($('.deck').find('li#matched-card').length === 16){
-            CongratulationsPopup()
+            congratulationsPopup()
         }
     });
-    //When user clicks on reset game button, reset the game
+    //When user clicks on reset game button symbol, reset the game
     $('.restart').on('click', function(){
         resetGame();
     });
@@ -281,7 +295,7 @@ $('#options').on('change', function() {
     const MODE_INFO =
      `<div class="card-panel blue-grey darken-2">
         <span class="white-text mode-info "></span>
-    </div>`
+    </div>`;
     //Only Add the mode card info html once and not every time difficulty mode option changes
     if($('.mode-info').length === 0){
         $('#gameStarter').find('.input-field').append(MODE_INFO);
@@ -305,11 +319,12 @@ $('#options').on('change', function() {
         //show info about the normal difficulty option
         $('.mode-info').text('In this mode you will have 25 seconds to complete the game');
     }
-})
+});
 
+//On click "change mode" button display gameStarter modal
 $('.change-mode').click(function(){
     $('#gameStarter').css('display', 'block');
-})
+});
 
 /**
  * @description on clicking "start game" button
@@ -319,7 +334,7 @@ $('.change-mode').click(function(){
  */
 $('.start-game').click(function(){
     if(value === undefined){
-        M.toast({html: 'Please! choose a Difficulty mode'})
+        M.toast({html: 'Please! choose a Difficulty mode'});
     }else{
         $('#gameStarter').css('display', 'none');
         startGame();
@@ -347,15 +362,3 @@ $('.retry-again').click(function(){
     $('.collapsible').collapsible();
     $('#gameStarter').css('display', 'block');
 }());
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
