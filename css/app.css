@@ -17,17 +17,18 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: Coda, cursive;
 }
 
+/* change name from conatiner to avoid collision materialize framework */
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
+/* override materialize framework to fix padding issue */
 ul:not(.browser-default){
     padding-left: 20px;
 }
@@ -61,7 +62,7 @@ ul:not(.browser-default){
     width: 85px;
     background: #2e3d49;
     font-size: 0;
-    color: #ffffff;
+    color: #fff;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -72,7 +73,7 @@ ul:not(.browser-default){
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02ccbbc5;
+    background-color: #02cbc5;
     cursor: default;
 }
 
@@ -82,7 +83,7 @@ ul:not(.browser-default){
 
 .deck .card.match {
     cursor: default;
-    background: #02ccbbc5;
+    background-color: #02cbc5;
     font-size: 33px;
 }
 
@@ -124,7 +125,7 @@ ul:not(.browser-default){
     background: rgba(231, 25, 25, 0.733);
 }
 #matched-card {
-    background: #07da35af;
+    background-color: #07da35af;
 }
 
 #timer{
@@ -144,7 +145,8 @@ ul:not(.browser-default){
     margin: 0 auto;
 }
 
-.collapsible-body, .collapsible-header {
+.collapsible-body,
+.collapsible-header {
     padding-left: 0;
 }
 
