@@ -123,18 +123,23 @@ const ANIMATION_END = (function(el) {
 function starRater(counter){
     //show 1 star
     if(counter > 34){
+        $('.feedback').text('Better luck next time!');
         $('.stars').find('li:nth-child(2)').children().removeClass('fa fa-star-half');
     //show one and half star
     }else if(counter > 30){
+        $('.feedback').text('You can do better!');
         $('.stars').find('li:nth-child(2)').children().attr('class','fa fa-star-half');
     //show 2 stars
     }else if(counter > 26){
+        $('.feedback').text('You got some skills there! amazing play, you can do even better');
         $('.stars').find('li:nth-child(3)').children().removeClass('fa fa-star-half');
     //show 2 and a half star
     }else if(counter > 22){
+        $('.feedback').text('Wow!you played like a pro');
         $('.stars').find('li:nth-child(3)').children().attr('class','fa fa-star-half');
     //show 3 stars if moves are less than 23
     }else{
+        $('.feedback').text('You are the greatest!');
         $('.stars').find('li').children().attr('class','fa fa-star');
     }
 }
@@ -263,7 +268,7 @@ function runMemoryCardGame(){
             //check whether both the card matches or not
             list = [];
         }
-        //run if user wins the game
+        //show congratulations popup if user wins the game
         if($('.deck').find('li#matched-card').length === 16){
             congratulationsPopup()
         }
